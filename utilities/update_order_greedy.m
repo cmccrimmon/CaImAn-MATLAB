@@ -8,11 +8,11 @@ function [O,lo] = update_order_greedy(A)
     A = A>0;
     A(1:K+1:K^2) = 0;
     
-    O{1} = 1;
-    lo(1) = 1;
-    for i = 2:K
+    O = {};
+    lo = [];
+    for i = 1:K
        cont = true;
-       for j = 1:length(O)           
+       for j = 1:numel(O)           
            if ~any(A(i,O{j}))
                O{j} = [O{j},i];
                lo(j) = lo(j) + 1;
@@ -21,7 +21,7 @@ function [O,lo] = update_order_greedy(A)
            end           
        end
        if cont
-           O{length(O)+1} = j;
+           O{end+1} = [i];
            lo = [lo,1];
        end
     end    
